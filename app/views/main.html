@@ -1,0 +1,104 @@
+<div class="container">
+
+    <form class="form-horizontal" name="leadForm" ng-submit="leadForm.$valid && create()" novalidate="">
+        <fieldset>
+
+            <!-- Form Name -->
+            <legend>Новая заявка</legend>
+
+            <!-- Text input-->
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="fullName">ФИО</label>
+
+                <div class="col-md-4">
+                    <input ng-model="dummyLead.fullName" id="fullName" name="fullName" type="text" placeholder="ФИО" class="form-control input-md"
+                           required="">
+
+                </div>
+            </div>
+
+            <!-- Text input-->
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="phone">Телефон</label>
+
+                <div class="col-md-4">
+                    <input ng-model="dummyLead.phone" id="phone" name="phone" type="phone" placeholder="Телефон" class="form-control input-md"
+                           required="" ng-minlength="10" ng-maxlength="10" ng-pattern="/^[0-9]+$/">
+                    <span class="help-block">10 значный номер без 8 или +7. Только цифры.</span>
+
+                </div>
+            </div>
+
+            <!-- Appended Input-->
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="summ">Сумма</label>
+
+                <div class="col-md-4">
+                    <div class="input-group">
+                        <input ng-model="dummyLead.summ" id="summ" name="summ" class="form-control" placeholder="Сумма" type="number" required="">
+                        <span class="input-group-addon">руб.</span>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Textarea -->
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="textarea">Примечания</label>
+                <div class="col-md-4">
+                    <textarea class="form-control" id="textarea" name="textarea" ng-model="dummyLead.notice"></textarea>
+                </div>
+            </div>
+
+            <!-- Button -->
+            <div class="form-group">
+                <label class="col-md-4 control-label" for=""></label>
+
+                <div class="col-md-4">
+                    <button id="" name="" class="btn btn-success" type="submit">Создать</button>
+                </div>
+            </div>
+
+        </fieldset>
+    </form>
+
+
+    <div class="table-responsive">
+        <legend>Заявки</legend>
+        <table id="usertable" class="table table-bordred table-striped" ng-table="tableParams"
+               templatePagination="null">
+            <thead>
+            <!--<th><input type="checkbox" id="checkall"/></th>-->
+            <th>ФИО</th>
+            <th>Телефон</th>
+            <th>Дата</th>
+            <th>Сумма</th>
+            <th>Комиссия</th>
+            <th>Статус</th>
+            </thead>
+            <tbody>
+            <tr ng-show="$data.length == 0"><td colspan="4" style="text-align: center; color:grey;">Пусто</td></tr>
+            <tr ng-repeat="lead in $data">
+                <!--<td><input type="checkbox" class="checkthis"/></td>-->
+                <td>{{lead.lastName + ' ' + lead.firstName + ' ' + lead.patronymic|cut:false:20:'...'}}</td>
+                <td>{{lead.phone}}</td>
+                <td>{{lead.ts * 1000 | date:"dd.MM.yyyy HH:mm:ss"}}</td>
+                <td>{{lead.summ}}</td>
+                <td>{{(lead.summ * 1.5)/100}}</td>
+                <td>
+                    <span class="label"
+                          ng-class="{
+                          'label-warning': lead.status_id == 1,
+                          'label-default': lead.status_id == 2,
+                          'label-danger': lead.status_id == 3,
+                          'label-info': lead.status_id == 4,
+                          'label-default': lead.status_id == 5
+                          }"
+                            >{{lead.statusName}}</span>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <div class="clearfix"></div>
+    </div>
+</div>

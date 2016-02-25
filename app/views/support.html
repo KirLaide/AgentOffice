@@ -1,0 +1,29 @@
+<div class="container">
+    <a href="#/" class="btn btn-warning"><span class="glyphicon glyphicon-arrow-left"></span> Назад</a>
+    <p></p>
+    <form class="form-horizontal" ng-submit="send()">
+        <fieldset>
+
+            <legend>Техподдержка</legend>
+
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="note">Ваш вопрос или пожелание</label>
+
+                <div class="col-md-8">
+                    <textarea class="form-control" id="note" name="note" cols="12" style="height: 200px;" ng-model="supportRequest"></textarea>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="singlebutton"></label>
+
+                <div class="col-md-4">
+                    <button id="singlebutton" name="singlebutton" class="btn btn-success">Отправить</button>
+                </div>
+            </div>
+
+        </fieldset>
+    </form>
+
+
+</div>

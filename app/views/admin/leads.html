@@ -1,0 +1,23 @@
+<a href="#/admin" class="btn btn-warning"><span class="glyphicon glyphicon-arrow-left"></span> Назад</a>
+<p></p>
+<div class="table-responsive">
+    <table id="usertable" class="table table-bordred table-striped" ng-table="tableParams">
+        <legend>Все лиды</legend>
+        <tr ng-repeat="lead in $data">
+            <td data-title="'Агент'">{{lead.name}}</td>
+            <td data-title="'Лид'">{{lead.leadName}}</td>
+            <td data-title="'Дата создания'">{{lead.ts * 1000 | date:"dd.MM.yyyy HH:mm:ss"}}</td>
+            <td data-title="'Статус'">
+                <span class="label"
+                      ng-class="{
+                          'label-default': lead.status_id == 1,
+                          'label-warning': lead.status_id == 3,
+                          'label-danger': lead.status_id == 2
+                          }"
+                    >{{lead.statusName}}</span>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <div class="clearfix"></div>
+</div>

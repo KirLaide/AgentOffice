@@ -1,0 +1,50 @@
+<form name="userEdit" novalidate="" ng-submit="userEdit.$valid && save(user.id)">
+    <div class="modal-header">
+        <button type="button" class="close" ng-click="close()"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h3 class="modal-title">{{isCreate ? 'Создание пользователя' : 'Редактирование пользователя'}}</h3>
+    </div>
+    <div class="modal-body">
+        <div class="form-group">
+            <label>E-mail <span class="small" style="color: red;" ng-show="userEdit.email.$error.vacantEmail">Пользователь с таким адресом уже зарегистрирован</span></label>
+            <input class="form-control" type="email" ng-model="user.email" emailvacant="user.id" name="email" required="">
+        </div>
+        <div class="form-group">
+            <label>Фамилия</label>
+            <input class="form-control" type="text" ng-model="user.lastName" required="">
+        </div>
+        <div class="form-group">
+            <label>Имя</label>
+            <input class="form-control" ng-pattern="/^[а-яА-Яa-zA-Z0-9' ]*$/" type="text" ng-model="user.name" required="">
+        </div>
+        <div class="form-group">
+            <label>Отчество</label>
+            <input class="form-control" type="text" ng-model="user.patronymic" required="">
+        </div>
+        <div class="form-group">
+            <label>Телефон</label>
+            <input class="form-control" type="text" ng-model="user.phone">
+        </div>
+        <div class="form-group">
+            <label>№ Договора</label>
+            <input class="form-control" type="text" ng-model="user.contractNo"  ng-disabled="user.id == 1">
+        </div>
+        <div class="form-group">
+            <label>AgentId</label>
+            <input class="form-control" ng-pattern="/[a-f0-9]{8}(?:-[a-f0-9]{4}){3}-[a-f0-9]{12}/i" type="text" ng-model="user.agentId" ng-required="user.id != 1" ng-disabled="user.id == 1">
+        </div>
+        <div class="form-group">
+            <label>OwnerId</label>
+            <input class="form-control" ng-pattern="/[a-f0-9]{8}(?:-[a-f0-9]{4}){3}-[a-f0-9]{12}/i" type="text" ng-model="user.ownerId" ng-required="user.id != 1" ng-disabled="user.id == 1">
+        </div>
+        <div class="checkbox">
+            <label>
+                <input ng-disabled="isCreate || user.id == 1" type="checkbox" ng-model="user.banned" ng-checked="user.banned == '1'" ng-true-value="1" ng-false-value="0"> Заблокирован
+            </label>
+        </div>
+
+    </div>
+    <div class="modal-footer">
+        <button type="submit" class="btn btn-primary" ng-class="{disabled: userEdit.$invalid}">Сохранить</button>
+        <button type="button" class="btn btn-warning" ng-click="close()">Закрыть</button>
+    </div>
+</form>
